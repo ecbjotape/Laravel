@@ -17,6 +17,8 @@ Route::prefix('usuarios')->group(function () {
     Route::get('/', [UsuariosController::class, 'getUser'])->name('home');
     Route::get('/novo', [UsuariosController::class, 'create']);
     Route::post('/novo', [UsuariosController::class, 'store'])->name('registrar');
-    Route::get('/alterar/{rg}', [UsuariosController::class, 'edit']);
-    Route::post('/alterar/{rg}', [UsuariosController::class, 'update'])->name('alterar');
+    Route::get('/alterar/{id}', [UsuariosController::class, 'edit']);
+    Route::post('/alterar/{id}', [UsuariosController::class, 'update'])->name('alterar');
+    Route::get('/excluir/{id}', [UsuariosController::class, 'delete']);
+    Route::post('/excluir/{id}', [UsuariosController::class, 'delete'])->name('excluir');
 });

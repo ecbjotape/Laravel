@@ -24,28 +24,28 @@ class UsuariosController extends Controller
     public function store(Request $request)
     {
         $url = $request->get('redirect_to', route('home'));
-    if (! $request->has('cancel') ){
-        $dados = $request->all();
-        Usuario::create($dados);
-        $request->session()->flash('message', 'Usuário cadastrado com sucesso');
-    }
-    else
-    { 
-        $request->session()->flash('message', 'Operação cancelada pelo usuário'); 
-    }
-    return redirect()->to($url);
+        if (! $request->has('cancel') ){
+            $dados = $request->all();
+            Usuario::create($dados);
+            $request->session()->flash('message', 'Usuário cadastrado com sucesso');
+        }
+        else{
+            $request->session()->flash('message', 'Operação cancelada pelo usuário'); 
+        }
+        return redirect()->to($url);
     }
   
-    public function edit($rg)
+    public function edit($id)
     {
-        $usuario = Usuario::findOrfail($rg);
-        return view('usuarios.update', [ 'usuario' => $usuario,  'action'=>route('alterar'), 'method'=>'post']);
+        $usuario = Usuario::findOrfail($id);
+        return view('usuarios.update', [ 'usuario' => $usuario]);
     }
 
-    public function update(Request $request, $rg)
+    public function update(Request $request, $id)
     {
         $url = $request->get('redirect_to', route('home'));
-        $usuario = Usuario::findOrfail($rg);
+        $usuario = Usuario::findOrfail($id);
+
         $usuario->update([
             'nome' => $request->nome,
             'rg' => $request->rg,
@@ -55,8 +55,11 @@ class UsuariosController extends Controller
         return redirect()->to($url);
     }
 
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
-        //
+        $url = $request->get('redirect_to', route('home'));
+        $usuario = Usuario::findOrfail($id);
+        $usuario->delete();
+        return redirect()->to($url);
     }
 }

@@ -4,9 +4,8 @@
 <div class="container">
     <div class="row">
         <h3>Novo Usuário</h3>
-        <form action="{{ route('alterar', [rg => $usuario->rg) }}" method="post">
+        <form method="post" >
             {{ csrf_field() }}
-            <input type="hidden" id="redirect_to" name="redirect_to" value={{URL::previous()}}>
             <div>
                 <label for="nome">Nome do Usuário</label>
                 <input type="text" id="nome" name="nome" value="{{ $usuario->nome }}">
@@ -23,7 +22,7 @@
                 <input type="submit" name="save_eqp" value="Salvar usuário">
                 <input type="submit" name="cancel" value="Cancelar">
             </div>
+        </form>
     </div>
-    </form>
 </div>
 @endsection

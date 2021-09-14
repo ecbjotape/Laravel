@@ -28,7 +28,10 @@
                     <td>
                         <ul class="list-inline">
                             <li>
-                            <a href="/usuarios/alterar/123123132">Editar</a>
+                                <a href="/usuarios/alterar/{{$usuarios->id}}">Editar</a>
+                            </li>
+                            <li>
+                                <a href="/usuarios/excluir/{{$usuarios->id}}">Deletar</a>
                             </li>
                         </ul>
                     </td>
